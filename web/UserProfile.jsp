@@ -53,6 +53,7 @@
 
 
         <!-- MAIN CSS -->
+        <link rel="stylesheet" href="css/ProfileUser.css">        
         <link rel="stylesheet" href="css/style.css">
     </head>
 
@@ -135,65 +136,88 @@
             </section>
 
 
-            <section class="site-section">
-                <div class="container">
-
-                    <div class="row align-items-center mb-5">
-                        <div class="col-lg-10 mb-4 mb-lg-0">
-                            <div class="d-flex align-items-center text-capitalize">
-                                <div>
-                                    <h2>User Profile</h2>
+            <div class="container light-style flex-grow-1 container-p-y">
+                <h4 class="font-weight-bold py-3 mb-4">
+                    Account settings
+                </h4>
+                <div class="card overflow-hidden">
+                    <div class="row no-gutters row-bordered row-border-light">
+                        <div class="col-md-3 pt-0">
+                            <div class="list-group list-group-flush account-settings-links">
+                                <a class="list-group-item list-group-item-action active" data-toggle="list"
+                                   href="#account-general">General</a>
+                                <a class="list-group-item list-group-item-action" data-toggle="list"
+                                   href="#account-change-password">Change password</a>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="tab-content">
+                                <div class="tab-pane fade active show" id="account-general">
+                                    <form action="EditProfileUser" class="card-body"  method="post">
+                                        <div class="form-group">
+                                            <label class="form-label" for="name">Name</label>
+                                            <input name="name-input" type="text" class="form-control mb-1" id="name" placeholder="Enter your name"
+                                                   value="${userinfo.getUserName()}" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="phone">Phone</label>
+                                            <input name="phone-input" type="text" class="form-control" id="phone" placeholder="Enter your phone"
+                                                   value="${userinfo.getPhone()}" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="job-type">Gender</label>
+                                            <label for="job-type">Gender</label><br>
+                                            <select class="selectpicker border rounded" id="job-type" data-style="btn-black"
+                                                    data-width="100%" title="Select Job Type" name="gen-input">
+                                                <option value="Male" selected>Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="date">Date of birth</label>
+                                            <input name="date-input" type="date" class="form-control" id="place" placeholder="Enter your address"
+                                                   value="${userinfo.getUserDOB()}" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="job-title" class="form-label">Skills</label>
+                                            <input name="skill-input" type="text" class="form-control" id="taxcode" placeholder="Enter your taxcode"
+                                                   value="${userinfo.getUserSkills()}" >
+                                        </div>
+                                        <div class="text-right mt-3">
+                                            <button type="submit" class="btn btn-primary">Save changes</button>&nbsp;
+                                        </div>
+                                    </form>
                                 </div>
+                                <form action="ChangePasswordServlet" method="POST" class="tab-pane fade" id="account-change-password">
+                                    <div class="card-body pb-2">
+                                        <div class="form-group">
+                                            <label class="form-label">Current password</label>
+                                            <input type="password" class="form-control" id="pass_input" name="pass-input" placeholder="Current Password">
+                                            <div class="message-response h5 " style="color: red">
+                                                ${inputError}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">New password</label>
+                                            <input type="password" class="form-control" id="pass_input" name="pass-input" placeholder="New Password">
+                                            <span class="message-form"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Repeat new password</label>
+                                            <input type="password" class="form-control" id="confirmpass_input" name="confirm-input"
+                                                   placeholder="Confirm New Password">
+                                        </div>
+                                        <div class="text-right mt-3">
+                                            <button type="submit" value="Submit" class="btn btn-primary">Change Password</button>&nbsp;
+                                        </div>
+                                    </div>
+                                </form>                       
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-5">
-                        <div class="col-lg-12">
-                            <form action="EditProfileUser" class="p-4 p-md-5 border rounded" method="post">
-                                <h3 class="text-black mb-5 border-bottom pb-2 text-capitalize">Profile</h3>
-                                <div class="form-group">
-                                    <label for="name" class="text-capitalize">Name</label>
-                                    <input name="name-input" type="text" class="form-control" id="name" placeholder="Enter your name"
-                                           value="${userinfo.getUserName()}" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone" class="text-capitalize">Phone</label>
-                                    <input name="phone-input" type="text" class="form-control" id="phone" placeholder="Enter your phone"
-                                           value="${userinfo.getPhone()}" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="place" class="text-capitalize">Gender</label>
-                                    <input name="gen-input" type="text" class="form-control" id="place" placeholder="Enter your address"
-                                           value="${userinfo.getGender()}" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="place" class="text-capitalize">Date Of Birth</label>
-                                    <input name="date-input" type="date" class="form-control" id="place" placeholder="Enter your address"
-                                           value="${userinfo.getUserDOB()}" >
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="job-title" class="text-capitalize">Skills</label>
-                                    <input name="skill-input" type="text" class="form-control" id="taxcode" placeholder="Enter your taxcode"
-                                           value="${userinfo.getUserSkills()}" >
-                                </div>
-                                <div class="row mb-5 justify-content-end">
-                                    <div class="col-lg-3 col-md-3">
-                                        <button href="EditProfileUs" class="btn btn-block btn-primary btn-md text-white">Update Profile</button>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3">
-                                        <a href="ChangepassUser" class="btn btn-block btn-secondary btn-md text-white">Change
-                                            password</a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-
-                    </div>
-
                 </div>
-            </section>
+            </div>
 
 
 
@@ -279,6 +303,10 @@
         <script src="js/bootstrap-select.min.js"></script>
 
         <script src="js/custom.js"></script>
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript"></script>
 
 
 
